@@ -3,7 +3,8 @@ venv
 .idea
 .pytest_cache
 .git
-.dist
+dist
+*.egg-info
 host.txt
 token.txt
 .pypirc
