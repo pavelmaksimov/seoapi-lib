@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+venv
+.idea
+.pytest_cache
+.git
+.dist
+host.txt
+token.txt
+.pypirc
