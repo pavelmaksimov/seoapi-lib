@@ -49,11 +49,11 @@ def test_load_tasks():
         'numdoc': 50,
         'is_mobile': 0,
         'domain': 'yandex.ru',
-        'session_id': 'aba51f11140f4c703256211d7cda67642b3075c79bb3d875d5e95343bb0e89ff',
+        'session_id': 'aba51f11140f4c703256211d7cda67642b3075c79bb3d875d5e95343bb0e89ff1',
         'queries': [{'query': '[!билеты !на !самолет]',
                      'query_id': '4bcbe299531547ea90c9aeaaa2076d34'}]
     }
-    r = api.load_tasks(**data)
+    r = api.load_tasks(data)
     print(r)
 
 

@@ -64,12 +64,12 @@ class SeoApi:
         self._api = Api(token, base_url)
         logging.basicConfig(level=logging_level)
 
-    def load_tasks(self, **data):
+    def load_tasks(self, config):
         """
         http://docs.seoapi.ru/#3
 
-        :param data:
-        POST-параметры запроса:
+        :param config: dict :
+        Описание параметров для Yandex & Google
             source:	string : Источник парсинга, yandex|google
             session_id:	string : Уникальный идентификатор сессии, любое текстовое значение (можно uuid4)
             priority: integer : Приоритет для сессии. Может принимать значение от 1 до 10. В настоящий момент опция не работает
@@ -106,14 +106,45 @@ class SeoApi:
           "session_id": "9bbe1184-3d9c-40f5-9654-3dbd7e4bde13",
           "query_ids": []
         }
+
+        ===========================================
+
+        :param config: dict :
+        Описание параметров для wordstat
+            source:	string : wordstat
+            session_id:	string : Уникальный идентификатор сессии, любое текстовое значение (можно uuid4)
+            queries: list : Либо список слов, либо список списков (id запроса, запрос), либо словарь
+            device: str : 'desktop', 'mobile', 'phone', 'tablet', все(пустая строка)
+            region:	integer : Без региона	внутренний id региона
+            page: integer : номер страницы вордстат для парсинга
+            params: dict : {"lr": 213}
+            queries:
+                query: string : Поисковый запрос
+                query_id: string : id запроса из вашей системы (если необходим)
+                device: string :
+                page: integer :
+                region: integer :
+
+            {
+              "session_id": "111111111-1111-1111-1111-111111111111",
+              "region": 213,
+              "page": 2,
+              "queries": [
+                  {"query_id": 2, "query": "...", "device": "desktop", "region": 1, "page": 1},
+                  {"query_id": 3, "query": "...", "device": "desktop", "region": 1, "page": 1},
+              ],
+              "source": "wordstat",
+              "params": {"lr": 213}
+            }
+
         """
-        if data["source"] != self.source:
+        if config["source"] != self.source:
             raise Exception(
                 f"В инициализированном классе source={self.source}, "
-                f"а в конфиге источник {data['source']}."
+                f"а в конфиге источник {config['source']}."
             )
         resource = f"{self.source}/load_tasks/"
-        result = self._api._request("post", resource, **data)
+        result = self._api._request("post", resource, **config)
         return result
 
     def get_session_status(self, session_id):

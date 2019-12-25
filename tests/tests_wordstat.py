@@ -41,7 +41,7 @@ def test_load_tasks():
             'device': '',
             'queries': [{'query': '[!билеты !на !самолет]', 'query_id': 'f00cc0b917a844b1ac12c8bd114b1b56'}],
             'source': 'wordstat'}
-    r = api.load_tasks(**data)
+    r = api.load_tasks(data)
     pprint(r)
 
 
