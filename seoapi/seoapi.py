@@ -182,7 +182,6 @@ class SeoApi:
         """
         http://docs.seoapi.ru/#o-y
 
-        :param source: str : yandex|google
         :param session_id: str : Идентификатор сессии, который вы послали при загрузки задач
         :param params: dict : GET параметры
         :return:
@@ -207,6 +206,42 @@ class SeoApi:
             },
             ...
           ],
+        }
+
+        ========================
+        Для Wordstat
+
+        :return:
+        {
+          "total": 20000,
+          "results": [
+            {
+              "query_id": 6582,
+              "query": "what should i do",
+              "parsed_at": 1506606697.409974,
+              "ws_type": "base",
+              "count": 13066,
+              "region": 213,
+              "device": "",
+              "update_date": "18.09.2017",
+              "source": "wordstat",
+              "including_phrases": [{ "number" : "13066", "phrase" : "what should i do" }, ...],
+              "related_phrases": [{ "number" : "13066", "phrase" : "what should i do" }, ...],
+            },
+            {
+              "query_id": 6564,
+               "parsed_at": 1506606697.409974
+              "query": "What is the point of this",
+              "count": 167,
+              "region": 213
+              "device": "",
+              "update_date": "18.09.2017",
+              "source": "wordstat",
+              "including_phrases": [{ "number" : "167", "phrase" : "What is the point of this"}, ...],
+              "related_phrases": [{ "number" : "167", "phrase" : "What is the point of this" }, ...],
+            },
+            ...
+          ]
         }
 
         """
@@ -305,7 +340,7 @@ class Serp(SeoApi):
         while offset < limit:
             sample = search_phrases[offset : offset + session_size]
             queries = [
-                {"query": q, "query_id": uuid.uuid4().hex} for q in search_phrases
+                {"query": q, "query_id": uuid.uuid4().hex} for q in sample
             ]
             s = "".join(sample)
             s = f"{suffix}{s}"
