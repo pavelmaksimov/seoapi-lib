@@ -3,4 +3,4 @@ from .seoapi import SeoApi, Serp, Wordstat
 
 __author__ = 'Pavel Maksimov'
 __email__ = 'vur21@ya.ru'
-__version__ = '2020.6.1'
+__version__ = '2020.6.2'

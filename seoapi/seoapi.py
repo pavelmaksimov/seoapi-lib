@@ -376,7 +376,7 @@ class Serp(SeoApi):
         for domain in domains:
             for is_mobile_ in is_mobile:
                 for region in regions:
-                    suffix = f"{suffix}{is_mobile}{region}{count_results}{self.source}"
+                    suffix = f"{suffix}{is_mobile_}{region}{count_results}{self.source}"
                     # Фразы расфасовываются по мелким пачкам, к которым
                     # присваивается идентификатор.
                     sessions_params_list = self.generate_sessions_id_and_queries_ids(
