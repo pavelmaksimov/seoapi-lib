@@ -17,7 +17,7 @@ class Api:
     def _process_response(self, response, params, data):
         logging.debug(f"{response.status_code} {response.reason}")
 
-        if response.status_code == 400:
+        if response.status_code in (400, 404):
             error = response.json().get("error")
 
             if error == "session wasn't added":
